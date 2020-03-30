@@ -1,0 +1,28 @@
+---
+title: 'DATA 607: Week 9 Assignment'
+author: "James Williams"
+date: "29 March 2020"
+output:
+  html_document:
+    df_print: paged
+---
+# Task
+Your task is to choose one of the New York Times APIs, construct an interface in R to read in the JSON data, and
+transform it into an R DataFrame.
+
+```{r, message=FALSE}
+library(httr)
+library(jsonlite)
+```
+
+# Import as Data Frame
+```{r}
+url <- 'https://api.nytimes.com/svc/movies/v2/reviews/all.json?api-key=nZZptayfj74B4ew5lF67g23SdCsosUPl'
+pull <- GET(url, accept_json())
+json <- content(pull, as="text")
+data <- fromJSON(json)
+df <- as.data.frame(data)
+head(df)
+```
+
+
